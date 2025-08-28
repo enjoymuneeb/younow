@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://younow.site/sitemap.xml

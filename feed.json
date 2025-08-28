@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Younow",
+    "description": "",
+    "home_page_url": "https://younow.site",
+    "feed_url": "https://younow.site/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "Muneeb"
+    },
+    "items": [
+    ]
+}
