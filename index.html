@@ -2,123 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beautiful Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIM Owner Checker (Demo)</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #74ebd5, #9face6);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
+      margin: 0;
     }
 
-    .calculator {
-      background-color: #ffffffdd;
+    .container {
+      background: rgba(255, 255, 255, 0.1);
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      width: 300px;
+      border-radius: 15px;
       text-align: center;
+      width: 300px;
     }
 
-    .calculator h1 {
+    input {
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
       margin-bottom: 20px;
-      color: #333;
-    }
-
-    input[type="number"] {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-
-    select, button {
-      width: 85%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 10px;
       font-size: 16px;
     }
 
     button {
-      background-color: #4CAF50;
-      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #34d399;
+      color: black;
+      font-size: 16px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background-color: #45a049;
     }
 
     .result {
       margin-top: 20px;
-      font-size: 20px;
-      color: #333;
-      font-weight: bold;
+      background-color: rgba(255,255,255,0.2);
+      padding: 15px;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="calculator">
-    <h1>Simple Calculator</h1>
-    <input type="number" id="num1" placeholder="Enter first number" />
-    <input type="number" id="num2" placeholder="Enter second number" />
-    
-    <select id="operation">
-      <option value="add">Add (+)</option>
-      <option value="subtract">Subtract (-)</option>
-      <option value="multiply">Multiply (×)</option>
-      <option value="divide">Divide (÷)</option>
-    </select>
-
-    <button onclick="calculate()">Calculate</button>
-
-    <div class="result" id="result">Result will appear here</div>
+  <div class="container">
+    <h2>SIM Owner Details Checker</h2>
+    <input type="text" id="phoneInput" placeholder="Enter phone number"/>
+    <button onclick="checkDetails()">Check</button>
+    <div class="result" id="resultBox" style="display:none;">
+      <p><strong>Name:</strong> <span id="name"></span></p>
+      <p><strong>Location:</strong> <span id="location"></span></p>
+      <p><strong>Operator:</strong> <span id="operator"></span></p>
+    </div>
   </div>
 
   <script>
-    function calculate() {
-      const num1 = parseFloat(document.getElementById("num1").value);
-      const num2 = parseFloat(document.getElementById("num2").value);
-      const operation = document.getElementById("operation").value;
-      let result = '';
+    function checkDetails() {
+      const phone = document.getElementById("phoneInput").value;
 
-      if (isNaN(num1) || isNaN(num2)) {
-        result = "Please enter valid numbers.";
+      // Fake static data (for demo purposes only)
+      const fakeData = {
+        "03001234567": { name: "Ali Khan", location: "Lahore, Pakistan", operator: "Jazz" },
+        "03111234567": { name: "Sara Ahmed", location: "Karachi, Pakistan", operator: "Telenor" },
+        "03211234567": { name: "Usman Riaz", location: "Islamabad, Pakistan", operator: "Zong" }
+      };
+
+      const result = fakeData[phone];
+
+      if (result) {
+        document.getElementById("name").textContent = result.name;
+        document.getElementById("location").textContent = result.location;
+        document.getElementById("operator").textContent = result.operator;
+        document.getElementById("resultBox").style.display = "block";
       } else {
-        switch (operation) {
-          case "add":
-            result = num1 + num2;
-            break;
-          case "subtract":
-            result = num1 - num2;
-            break;
-          case "multiply":
-            result = num1 * num2;
-            break;
-          case "divide":
-            result = num2 === 0 ? "Cannot divide by zero" : (num1 / num2).toFixed(2);
-            break;
-          default:
-            result = "Invalid operation";
-        }
+        alert("No record found. This is a demo only.");
+        document.getElementById("resultBox").style.display = "none";
       }
-
-      document.getElementById("result").innerText = "Result: " + result;
     }
   </script>
 
 </body>
 </html>
+
 
