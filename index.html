@@ -1,39 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beautiful Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-def add(x, y):
-    return x + y
+    .calculator {
+      background-color: #ffffffdd;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+    }
 
-def subtract(x, y):
-    return x - y
+    .calculator h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-def multiply(x, y):
-    return x * y
+    input[type="number"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
 
-def divide(x, y):
-    if y == 0:
-        return "Cannot divide by zero!"
-    return x / y
+    select, button {
+      width: 85%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
 
-print("Select operation:")
-print("1. Add")
-print("2. Subtract")
-print("3. Multiply")
-print("4. Divide")
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-choice = input("Enter choice (1/2/3/4): ")
+    button:hover {
+      background-color: #45a049;
+    }
 
-try:
-    num1 = float(input("Enter first number: "))
-    num2 = float(input("Enter second number: "))
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
 
-    if choice == '1':
-        print("Result:", add(num1, num2))
-    elif choice == '2':
-        print("Result:", subtract(num1, num2))
-    elif choice == '3':
-        print("Result:", multiply(num1, num2))
-    elif choice == '4':
-        print("Result:", divide(num1, num2))
-    else:
-        print("Invalid input")
-except ValueError:
-    print("Invalid number input")
+  <div class="calculator">
+    <h1>Simple Calculator</h1>
+    <input type="number" id="num1" placeholder="Enter first number" />
+    <input type="number" id="num2" placeholder="Enter second number" />
+    
+    <select id="operation">
+      <option value="add">Add (+)</option>
+      <option value="subtract">Subtract (-)</option>
+      <option value="multiply">Multiply (×)</option>
+      <option value="divide">Divide (÷)</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="result">Result will appear here</div>
+  </div>
+
+  <script>
+    function calculate() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operation = document.getElementById("operation").value;
+      let result = '';
+
+      if (isNaN(num1) || isNaN(num2)) {
+        result = "Please enter valid numbers.";
+      } else {
+        switch (operation) {
+          case "add":
+            result = num1 + num2;
+            break;
+          case "subtract":
+            result = num1 - num2;
+            break;
+          case "multiply":
+            result = num1 * num2;
+            break;
+          case "divide":
+            result = num2 === 0 ? "Cannot divide by zero" : (num1 / num2).toFixed(2);
+            break;
+          default:
+            result = "Invalid operation";
+        }
+      }
+
+      document.getElementById("result").innerText = "Result: " + result;
+    }
+  </script>
+
+</body>
+</html>
+
